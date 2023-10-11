@@ -21,7 +21,6 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 public class UpskillSubscription {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
