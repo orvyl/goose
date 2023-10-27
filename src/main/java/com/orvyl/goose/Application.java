@@ -21,14 +21,6 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-    @Bean
-    public CommandLineRunner runSlackApp(App app, @Value("${slack.app-token}") String appToken) {
-        return args -> {
-            SocketModeApp socketModeApp = new SocketModeApp(appToken, app);
-            socketModeApp.run(true);
-        };
-    }
-
 	@Bean
 	public CommandLineRunner initializeData(CoachService coachService) {
 		return args -> {
@@ -56,6 +48,14 @@ public class Application {
             coachService.registerCoach("Beejay", "Amancio", "TAC", LocalDate.of(2023, Month.SEPTEMBER, 27));
             coachService.registerCoach("Tin", "De Joya", "DCup1", LocalDate.of(2023, Month.JANUARY, 1));
 			log.info("Initial data loaded");
+        };
+    }
+
+    @Bean
+    public CommandLineRunner runSlackApp(App app, @Value("${slack.app-token}") String appToken) {
+        return args -> {
+            SocketModeApp socketModeApp = new SocketModeApp(appToken, app);
+            socketModeApp.run(true);
         };
     }
 }
